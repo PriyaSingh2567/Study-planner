@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: study-planner-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: study-planner-app
+  template:
+    metadata:
+      labels:
+        app: study-planner-app
+    spec:
+      containers:
+      - name: study-planner-app
+        image: study-planner-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: MONGO_URI
+          value: "mongodb://mongo:27017/studyplanner"
+        - name: JWT_SECRET
+          value: "study-planner-secret-key-2024"
